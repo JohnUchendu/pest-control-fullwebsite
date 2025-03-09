@@ -50,7 +50,8 @@ export default function Hero() {
       className="relative w-full h-[90vh] bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: "url('/people-disinfecting-biohazard-area.jpg')" }} // Replace with actual image
     >
-      <div className="absolute inset-0 bg-black/50"></div> {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/50 z-0"></div> {/* Dark Overlay */}
+      
 
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-12 relative z-10">
         {/* Left Side - Text */}

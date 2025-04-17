@@ -12,7 +12,7 @@ export default function TopNavbar() {
         <div className="flex items-center flex-shrink-0">
           <Link href={"/"}>
           <Image
-            src="/eversafelogo.png"
+            src="/eversafelogo.PNG"
             alt="Pest Control Logo"
             width={120}
             height={40}

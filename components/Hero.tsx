@@ -1,131 +1,89 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 
-const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-});
+const slides = [
+  {
+    image: "/hero/happyfamily.jpg",
+    title: "Residential Pest Control",
+    description: "Providing strategic Pest Control solutions tailored to your needs.",
+    buttonText: "Claim free inspection",
+    link: "/contact", // Add your consultation page link here
+  },
+  {
+    image: "/hero/eversafe3.jpg",
+    title: "Commercial Pest Control",
+    description:
+      "Committed to protecting your offices, hotels and schools with diligence and integrity.",
+    buttonText: "Call now",
+    link: "/contact", // Add your services page link here
+  },
+  {
+    image: "/hero/people-disinfecting-biohazard-area.jpg",
+    title: "Your Pest Control Partner",
+    description:
+      "Guiding you through frustrating pest matters with confidence and expertise.",
+    buttonText: "Start eradicating pest",
+    link: "/contact", // Add your contact page link here
+  },
+];
 
 export default function Hero() {
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: { name: "", email: "", phone: "" },
-  });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // function onSubmit(values: any) {
-  //   console.log(values);
-  //   alert("Form submitted successfully!");
-  // }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 15000); // 15 seconds
 
-  async function onSubmit(values: any) {
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-  
-      if (response.ok) {
-        alert("Form submitted successfully!");
-        form.reset();
-      } else {
-        alert("Something went wrong, please try again.");
-      }
-    } catch (error) {
-      alert("Network error, please try again.");
-    }
-  }
-  
-
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section 
-      className="relative w-full h-[90vh] bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: "url('/people-disinfecting-biohazard-area.jpg')" }} // Replace with actual image
-    >
-      <div className="absolute inset-0 bg-black/50 z-0"></div> {/* Dark Overlay */}
-      
-
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-12 relative z-10">
-        {/* Left Side - Text */}
-        <div className="text-white max-w-lg">
-          <h1 className="text-4xl md:text-5xl font-bold">
-            Say Goodbye to Pests, <span className="text-green-400">For Good!</span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-200">
-            Get expert pest control with safe, eco-friendly treatments.  
-            Book your free inspection today!
-          </p>
-        </div>
-
-        {/* Right Side - ShadCN Form */}
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-md">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Book a Free Inspection</h2>
-          
-          {/* ShadCN Form */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Full Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="John Doe" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="example@email.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input type="tel" placeholder="(123) 456-7890" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-                Schedule Now
-              </Button>
-            </form>
-          </Form>
-
-          {/* Discount Text */}
-          <p className="text-center text-sm text-green-700 font-semibold mt-4">
-            🎉 10% OFF for First-Time Customers!
-          </p>
-        </div>
-      </div>
-    </section>
+    <Carousel className="w-full h-[500px] relative">
+      <CarouselContent>
+        <AnimatePresence mode="wait">
+          {slides.map((slide, index) =>
+            index === currentIndex ? (
+              <CarouselItem key={index} className="relative w-full h-[500px]">
+                <motion.div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${slide.image})` }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8 }}
+                />
+                <motion.div
+                  className="absolute inset-0 bg-black/50 flex items-center px-10 text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <div className="max-w-lg">
+                    <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
+                    <p className="text-lg mb-6">{slide.description}</p>
+                    <Link href={slide.link} passHref>
+                      <Button className="bg-yellow-300 border-2 text-black hover:bg-yellow-200">
+                        {slide.buttonText}
+                      </Button>
+                    </Link>
+                  </div>
+                </motion.div>
+              </CarouselItem>
+            ) : null
+          )}
+        </AnimatePresence>
+      </CarouselContent>
+    </Carousel>
   );
 }

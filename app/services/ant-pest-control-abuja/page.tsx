@@ -1,11 +1,8 @@
+
 import React from 'react'
 
 import { Metadata } from 'next'
 
-import About from '@/components/About'
-import Advantages from '@/components/Advantages'
-import ClientLogos from '@/components/Clients'
-import Testimonials from '@/components/Testimonials'
 
 
 export const metadata: Metadata = {
@@ -19,12 +16,12 @@ export const metadata: Metadata = {
   openGraph: {
     images: "/og-image.png",
   },
-  title: "About - Ever-safe environmental services ",
-  description: "About Number 1 Pest control with Ever-safe environmental services",
+  title: "Ant Pest Control Abuja ",
+  description: "Ant Pest Control in Abuja with Ever-safe environmental services",
   generator: "",
   applicationName: "Ever-safe environmental services",
   referrer: "origin-when-cross-origin",
-  keywords: ["Ever-safe environmental services", "Pest Contol Services", "About"],
+  keywords: ["Ever-safe environmental services", "Pest Contol Services", "Ant pest control", "ant pest control Abuja"],
   authors: [{ name: "John" }],
   creator: "John Uchendu",
   publisher: "John Uchendu",
@@ -35,14 +32,10 @@ export const metadata: Metadata = {
   },
 };
 
-
 const page = () => {
   return (
-    <div>
-      <About />
-      <Advantages/>
-      <ClientLogos/>
-      <Testimonials/>
+    <div>ant pest control abuja
+        
     </div>
   )
 }

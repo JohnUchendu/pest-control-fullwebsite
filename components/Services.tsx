@@ -1,53 +1,87 @@
+
 "use client";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { motion } from "framer-motion";
 
-export default function Services() {
-  const services = [
-    {
-      title: "Residential Pest Control",
-      image: "/residential-pest.jpg", // Replace with actual image path
-      description: "Protect your home from pests with our safe and effective solutions.",
-    },
-    {
-      title: "Commercial Pest Control",
-      image: "/commercial-pest.jpg", // Replace with actual image path
-      description: "Ensure a pest-free environment for your business with our professional service.",
-    },
-    {
-      title: "Termite Inspection & Removal",
-      image: "/termite-control.jpg", // Replace with actual image path
-      description: "Get expert termite inspection and removal to protect your property.",
-    },
-  ];
+const services = [
+  {
+    title: "Ant",
+    image: "/ant.jpeg",
+    description:
+      "Ant Control",
+    
+  },
+  {
+    title: "Cockroach",
+    image: "/cockroach.jpeg",
+    description:
+      "Cockroach Control",
+    
+  },
+  {
+    title: "Rat ",
+    image: "/rat.jpg",
+    description:
+      "Rat Control",
 
+  },
+  {
+    title: "Termite",
+    image: "/termite.jpeg",
+    description:
+      "Termite Control",
+    // bioUrl: "law-firm-services/telecommunication",
+  },
+  
+];
+
+export default function OurServices() {
   return (
-    <section className="py-16 px-6 bg-green-700 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-10">
-        Our Pest Control Services
+    <div
+      className="py-16 px-8"
+      style={{
+        backgroundImage: "url(/servicesbg.webp)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <h2 className="text-4xl text-green-700 font-bold text-center mb-10">
+        Our Services
       </h2>
-
-      {/* Cards Container */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {services.map((service, index) => (
-          <Card key={index} className="shadow-lg border rounded-lg">
-            <CardHeader>
-              <CardTitle className="text-xl font-semibold">{service.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center">
+          <motion.div
+            key={index}
+            className="flex bg-white shadow-lg rounded-lg overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <div className="w-1/3">
               <Image
                 src={service.image}
                 alt={service.title}
-                width={300}
-                height={200}
-                className="rounded-md"
+                width={150}
+                height={150}
+                className="object-cover h-full w-full"
               />
-              <p className="text-gray-600 mt-4 text-sm">{service.description}</p>
-            </CardContent>
-          </Card>
+            </div>
+            <div className="w-2/3 p-4">
+              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+              <p className="text-gray-600">{service.description}</p>
+              {/* <Link href={service.bioUrl} rel="noopener noreferrer">
+                <Button className="mt-4 w-1/2">
+                  Read More
+                </Button>
+              </Link> */}
+            </div>
+            <div> 
+            </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

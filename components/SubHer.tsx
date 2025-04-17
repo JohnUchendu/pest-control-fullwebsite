@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/Link"
+
 import { Button } from "@/components/ui/button";
 
 export default function SubHero() {
   return (
-    <section className="py-16 px-6 text-center bg-gray-100">
+    <section className="py-16 px-6 text-center">
       <div className="max-w-2xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
           Safe and Reliable Pest Control
@@ -13,8 +15,10 @@ export default function SubHero() {
           Our expert team provides eco-friendly and effective pest control solutions. 
           Protect your home and business with our trusted services.
         </p>
-        <Button className="mt-6 bg-green-600 hover:bg-green-700">
-          Get a Free Quote
+        <Button className="mt-6 bg-yellow-300 hover:bg-yellow-500">
+          <Link href={"/contact"}>
+          Claim your free inspection
+          </Link>
         </Button>
       </div>
     </section>

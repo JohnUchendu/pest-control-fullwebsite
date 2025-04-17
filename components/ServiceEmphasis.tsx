@@ -1,46 +1,56 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import React from "react";
+import { FlaskConical, UserCog, Users, BadgeCheck, Smile } from "lucide-react";
 
-export default function ServiceEmphasis() {
+const features = [
+  {
+    icon: <FlaskConical className="w-10 h-10 text-green-600" />,
+    title: "Chemicals",
+    subtitle: "Odorless & WHO approved",
+  },
+  {
+    icon: <UserCog className="w-10 h-10 text-green-600" />,
+    title: "Technicians",
+    subtitle: "Certified & Trained by ENTOMOLOGIST",
+  },
+  {
+    icon: <Users className="w-10 h-10 text-green-600" />,
+    title: "Team",
+    subtitle: "Expert & Well Trained",
+  },
+  {
+    icon: <BadgeCheck className="w-10 h-10 text-green-600" />,
+    title: "Experience",
+    subtitle: "More than 20 Years",
+  },
+  {
+    icon: <Smile className="w-10 h-10 text-green-600" />,
+    title: "Happy Customers",
+    subtitle: "More than 5000+",
+  },
+];
+
+const WhyUs = () => {
   return (
-    <section className="py-16 px-6  flex justify-center ">
-      <div className="max-w-3xl w-full flex flex-col md:flex-row items-center  mx-auto px-6">
-        
-        {/* Left: Image */}
-        <div className="w-full md:w-1/2">
-          <Image
-            src="/pest-control-service.jpg" // Replace with actual image path
-            alt="Professional Pest Control"
-            width={600}
-            height={400}
-            className="rounded-lg shadow-lg object-cover w-full h-full"
-          />
-        </div>
-
-        {/* Right: One Card (No Border, No Gap) */}
-        <div className="w-full md:w-1/2">
-          <Card className="shadow-none border-none rounded-none">
-            <CardHeader>
-              <CardTitle className="text-2xl text-green-600 font-semibold">
-                Reliable & Effective Pest Control
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">
-                Our expert team provides fast, safe, and long-lasting pest control solutions 
-                to keep your home or business protected.
-              </p>
-              <Button className="mt-4 bg-green-600 hover:bg-green-700">
-                Get a Free Quote
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-
+    <div className="py-12 bg-white px-4 md:px-8">
+      <h2 className="text-3xl font-bold text-center text-green-700 mb-10">
+        Why Us
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto justify-center">
+        {features.map((item, idx) => (
+          <div
+            key={idx}
+            className="flex flex-col items-center text-center bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+          >
+            {item.icon}
+            <h4 className="font-semibold text-lg mt-2">{item.title}</h4>
+            <p className="text-sm text-gray-600 mt-1">{item.subtitle}</p>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default WhyUs;

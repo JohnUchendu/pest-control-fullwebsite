@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/Link"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button";
 
@@ -16,7 +16,7 @@ export default function SubHero() {
           Protect your home and business with our trusted services.
         </p>
         <Button className="mt-6 bg-yellow-300 hover:bg-yellow-500">
-          <Link href={"/contact"}>
+          <Link href="/contact">
           Claim your free inspection
           </Link>
         </Button>
